@@ -1,0 +1,101 @@
+
+
+***Description****
+——————————————————
+This assignment involves implementation of a storage Manager whose function is to read a block
+From a file on disk into memory and to write them from memory onto the file present on disk.
+The Storage manager has Pages i.e blocks (PAGE_SIZE) whose size is defined and fixed(4096 bytes).
+ 
+
+The files that are being committed are:
+
+*Makefile
+*README.txt
+*dberror.c
+*dberror.h
+*storage_mgr.c
+*storage_mgr.h
+*test_assign1_1.c
+*test_helper.h
+
+****To run the Script Use the following commands***
+_______________________________________
+
+1. Use the ‘make’ command to Make the assignment object files and to compile them 
+2. This will result in creation of object files which are test_assign1 
+
+
+****To run the default given test case: ****
+————————————————————————————
+Compile : make assign1_1 // to create the object files
+Run : ./assign1_1
+
+
+To Delete the previously compiled files:
+————————————————————————————
+Run : make clean
+
+
+=========================
+**        IMPLEMENTATION         **
+=========================
+
+File Related Functions :
+——————————————————————
+*initStorageManager(): It Initializes the StorageManager.
+
+
+*createPageFile(): It is used to create a new page file
+
+*openPageFile (): It is used to open the File and to retrieve the total number of pages.
+
+*closePageFile(): Closes the page as directed by the pointer. And if the file is not found or closed, the function
+Returns RC_FILE_NOT_FOUND
+
+*destroyPageFile(): It destroys the page file corresponding to the filename.
+
+
+****Read Functions****:
+——————————————————————
+
+These functions are implemented to perform read related operations from the file . It basically uses the file pointer
+From the file handler to perform the reading.
+
+*readBlock(): This function reads the current page on which the File pointer is positioned. It catches the exception if the 
+file has Less than pageNum Pages then it returns RC_READ_NON_EXISTING_PAGE.
+   
+
+*getBlockPos(): This method is used to determine the current page position using the attribute curPagePos
+
+*readFirstBlock(): This method is used to return the first page position of a file .
+
+*readLastBlock():It reads the last block from the page.
+
+*readPreviousBlock(): It reads page from previous block by passing the (curPagePos - 1) as a parameter to the roadblock function.
+
+*readCurrentBlock(): This method reads the current block by passing the pageNum parameter as curPagePos
+
+*readNextBlock():This method reads the current block by passing the pageNum parameter as (curPagePos +1)
+
+
+
+**** Write Functions****:
+——————————————————————
+
+These functions are implemented to perform write related operations I.e to write blocks present in the memory to the given file
+Present on disk.
+
+*writeBlock(): This function writes the page from the memory block as pointed by the memory pointer to the file present on the disk.
+It catches the exception that if the file has pages less than pageNum then it should return RC_WRITE_FAILED.
+
+*writeCurrentBlock(): It passes current page position as the parameter and passed to the writeBlock function and writes page back to the file  present on (disk) .
+
+*appendEmptyBlock(): this functions writes a new empty page and appends it to end of the file.
+
+*ensureCapacity(): this function Increases the size of the file to required size by appending required pages.
+
+
+
+
+
+
